@@ -1,0 +1,16 @@
+{
+    "app": {
+        "title": "Vue3 Template"
+    },
+    "input": {
+        "error_email_format": "信箱格式錯誤",
+        "error_required": "此欄位為必填"
+    },
+    "login": {
+        "button_login": "登入",
+        "input_label_email": "請輸入信箱",
+        "input_label_password": "請輸入密碼",
+        "message_login_fail_title": "",
+        "title": "登入"
+    }
+}

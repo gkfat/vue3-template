@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "lokalise.i18n-ally",
+        "dozerg.tsimportsorter",
+		"antfu.vite",
+        "vue.volar",
+		"vue.vscode-typescript-vue-plugin",
+    ]
+}

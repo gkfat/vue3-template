@@ -1,0 +1,17 @@
+{
+	"editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+    },
+    "eslint.codeActionsOnSave.mode": "all",
+    "eslint.validate": [
+        "vue",
+    ],
+    "eslint.format.enable": true,
+    "i18n-ally.localesPaths": [
+        "src/locales"
+    ],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.sortKeys": true
+}
