@@ -34,7 +34,6 @@
                 <p class="text-h6">
                     {{ user?.name }}
                 </p>
-           
             </v-list-item>
 
             <v-divider class="my-1" />
@@ -69,10 +68,7 @@ const menu = ref(false);
 
 const user = computed(() => authStore.state.user);
 
-const avatarAlternative = computed(() => {
-    return '';
-});
-
+const avatarAlternative = computed(() => '');
 
 const logout = async () => {
     await authStore.logout();

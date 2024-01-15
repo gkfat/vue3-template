@@ -14,8 +14,6 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:vue/vue3-recommended',
-        'plugin:@intlify/vue-i18n/recommended',
-        'plugin:vue/vue3-essential',
         '@vue/eslint-config-typescript',
         'airbnb',
         'airbnb/hooks',
