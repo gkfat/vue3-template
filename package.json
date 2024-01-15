@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
+    "build": "vue-tsc --noEmit && vite build",
+    "docker:build": "docker build . -t vue3-template",
+    "docker:up": "docker run -d -p 8080:80 --name vue3-template vue3-template",
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
