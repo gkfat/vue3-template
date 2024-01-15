@@ -2,7 +2,7 @@
 	"editor.insertSpaces": true,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll": true,
+        "source.fixAll": "explicit"
     },
     "eslint.codeActionsOnSave.mode": "all",
     "eslint.validate": [

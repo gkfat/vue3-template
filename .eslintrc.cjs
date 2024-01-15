@@ -2,10 +2,20 @@ module.exports = {
     root: true,
     env: {
         node: true,
+        browser: true,
+        es2021: true,
+    },
+    parser: 'vue-eslint-parser',
+    parserOptions: {
+        // see https://eslint.vuejs.org/user-guide/#what-is-the-use-the-latest-vue-eslint-parser-error
+        ecmaVersion: 'latest',
+        sourceType: 'module',
     },
     extends: [
         'eslint:recommended',
         'plugin:vue/vue3-recommended',
+        'plugin:@intlify/vue-i18n/recommended',
+        'plugin:vue/vue3-essential',
         '@vue/eslint-config-typescript',
         'airbnb',
         'airbnb/hooks',
