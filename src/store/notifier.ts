@@ -1,6 +1,11 @@
+import {
+    computed,
+    ref,
+} from 'vue';
+
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
-import { NotifyItem, NotifyOptions } from '@/types/notifier';
+
+import { Notify } from '@/types/notifier';
 import { randomId } from '@/utils/common';
 
 /** 同時顯示的最多通知數量 */
@@ -25,7 +30,7 @@ const presetSettings = {
     },
 };
 
-const createNotifierItem = (options: NotifyOptions): NotifyItem => ({
+const createNotifierItem = (options: Notify.Options): Notify.Item => ({
     id: randomId(),
     content: options.content || '',
     color: options.color || 'primary',
@@ -34,16 +39,16 @@ const createNotifierItem = (options: NotifyOptions): NotifyItem => ({
 
 export const useNotifierStore = defineStore('notifier', () => {
     /** 正在顯示的通知 */
-    const list = ref([] as NotifyItem[]);
+    const list = ref([] as Notify.Item[]);
 
     /** 等待顯示的通知 */
-    const queue = ref([] as NotifyItem[]);
+    const queue = ref([] as Notify.Item[]);
 
     /** 是否達到最大顯示數量 */
     const reachedMaximum = computed(() => list.value.length >= MAXIMUM_NOTIFY);
 
     /** 新增通知 */
-    const add = (options: NotifyOptions) => {
+    const add = (options: Notify.Options) => {
         const item = createNotifierItem(options);
         if (reachedMaximum.value) {
             queue.value.push(item);
@@ -54,14 +59,26 @@ export const useNotifierStore = defineStore('notifier', () => {
     };
 
     /** 增加 Error 類型的通知 */
-    const error = (options: NotifyOptions) => add({
+    const error = (options: Notify.Options) => add({
         ...presetSettings.error,
         ...options,
     });
 
     /** 增加 Success 類型的通知 */
-    const success = (options: NotifyOptions) => add({
+    const success = (options: Notify.Options) => add({
         ...presetSettings.success,
+        ...options,
+    });
+
+    /** 增加 Warn 類型的通知 */
+    const warn = (options: Notify.Options) => add({
+        ...presetSettings.warn,
+        ...options,
+    });
+
+    /** 增加 Info 類型的通知 */
+    const info = (options: Notify.Options) => add({
+        ...presetSettings.info,
         ...options,
     });
 
@@ -83,6 +100,8 @@ export const useNotifierStore = defineStore('notifier', () => {
         queue,
         add,
         success,
+        info,
+        warn,
         error,
         remove,
     };

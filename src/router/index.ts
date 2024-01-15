@@ -1,34 +1,75 @@
 // Composables
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
+import {
+    createRouter,
+    createWebHistory,
+    RouteRecordRaw,
+} from 'vue-router';
+
+import { installGuard } from './guard';
 
 const routes: RouteRecordRaw[] = [
     {
         path: '/login',
-        component: () => import('@/views/login/Login.vue'),
+        name: 'Login',
         meta: {
-            requireAuth: false,
+            requiresAuth: false,
+            hidden: true,
+            title: '',
+            childAsRoot: false,
         },
+        component: () => import('@/views/login/Login.vue'),
     },
     {
-        path: '',
+        path: '/',
         redirect: '/home',
-        component: () => import('@/layouts/Default.vue'),
+        component: () => import('@/layouts/app/AppLayout.vue'),
         children: [
             {
                 path: 'home',
+                meta: {
+                    requiresAuth: false,
+                    hidden: false,
+                    title: 'nav.home',
+                },
                 component: () => import('@/views/home/Home.vue'),
             },
-            {
-                path: '/:catchAll(.*)*',
-                component: () => import('@/views/error/404.vue'),
-            },
         ],
+    },
+    /**
+     * 錯誤頁面
+     */
+    {
+        path: '/:catchAll(.*)*',
+        name: 'Any',
+        redirect: '/404',
+    },
+    {
+        path: '/401',
+        name: '401',
+        meta: {
+            requiresAuth: true,
+            title: '',
+            hidden: true,
+        },
+        component: () => import('@/views/error/401.vue'),
+    },
+    {
+        path: '/404',
+        name: '404',
+        meta: {
+            requiresAuth: true,
+            title: '',
+            hidden: true,
+        },
+        component: () => import('@/views/error/404.vue'),
     },
 ];
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(),
     routes,
 });
+
+installGuard(router);
 
 export default router;

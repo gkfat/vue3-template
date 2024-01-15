@@ -1,19 +1,54 @@
-import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export interface AuthState {
-    token: string | null;
-}
+import { defineStore } from 'pinia';
+
+import { User } from '@/types/user';
 
 export const useAuthStore = defineStore('auth', () => {
-    const token = ref(null as string | null);
+    const state = ref({
+        token: null as string | null,
+        user: null as User.User | null,
+    });
 
-    const logout = () => {
-        token.value = null;
+    const setToken = (token: string) => {
+        state.value.token = token;
+        localStorage.setItem('auth-token', token);
+    };
+
+    const getToken = (): string | null => {
+        const token = localStorage.getItem('auth-token') ?? null;
+        return token;
+    };
+
+    const setUser = (user: User.User) => {
+        localStorage.setItem('auth-user', JSON.stringify(user));
+        state.value.user = user;
+    };
+
+    /** 從 storage 取出 user */
+    const getStorageUser = (): User.User | null => {
+        const user = localStorage.getItem('auth-user') ?? null;
+
+        if (typeof user === 'string') {
+            return JSON.parse(user);
+        }
+
+        return user;
+    };
+
+    const logout = async () => {
+        state.value.token = null;
+        state.value.user = null;
+        localStorage.removeItem('auth-token');
+        localStorage.removeItem('auth-user');
     };
 
     return {
-        token,
+        state,
+        setToken,
+        getToken,
+        setUser,
+        getStorageUser,
         logout,
     };
 });

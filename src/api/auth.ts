@@ -1,14 +1,17 @@
-import { AuthLogin } from '@/types/auth';
-import { request } from './agent';
-import { ApiRoutes } from './api-route';
+import { Auth } from '@/types/auth';
 
-const agent = request(ApiRoutes.a);
+import { request } from './util/agent';
+import { ApiRoutes } from './util/api-route';
+
+const agent = request();
 
 export class AuthService {
-    static async login(data: AuthLogin) {
+    static async login(
+        data: Auth.Login.Request,
+    ): Promise<Auth.Login.Response> {
         return agent({
             method: 'post',
-            url: '/login',
+            url: ApiRoutes.auth.login,
             data,
         });
     }

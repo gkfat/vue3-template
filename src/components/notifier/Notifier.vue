@@ -1,6 +1,7 @@
 <template>
-    <div
-        class="notifier-wrapper d-flex flex-column flex-sm-column-reverse align-end"
+    <transition-group
+        tag="div"
+        class="notifier-wrapper d-flex flex-column flex-sm-column-reverse align-end pa-4"
     >
         <template
             v-for="item in notifierStore.list"
@@ -14,13 +15,13 @@
                 :color="item.color"
             />
         </template>
-    </div>
+    </transition-group>
 </template>
 
 <script lang="ts" setup>
 import { useNotifierStore } from '@/store/notifier';
 
-import NotificationCard from './NotificationCard.vue';
+import NotificationCard from './components/NotificationCard.vue';
 
 const notifierStore = useNotifierStore();
 </script>

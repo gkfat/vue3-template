@@ -1,6 +1,7 @@
 {
     "app": {
-        "title": "Vue3 Template"
+        "title": "Vue3 Template",
+        "button_logout": "登出"
     },
     "input": {
         "error_email_format": "信箱格式錯誤",

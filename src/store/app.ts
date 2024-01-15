@@ -1,15 +1,18 @@
-import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+import { defineStore } from 'pinia';
+
 export const useAppStore = defineStore('app', () => {
-    const drawerState = ref(false);
+    const state = ref({
+        drawer: false,
+    });
 
     const toggleDrawer = () => {
-        drawerState.value = !drawerState.value;
+        state.value.drawer = !state.value.drawer;
     };
 
     return {
-        drawerState,
+        state,
         toggleDrawer,
     };
 });
